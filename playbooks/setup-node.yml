@@ -1,0 +1,4 @@
+- debug: msg="Running setup on {{ inventory_hostname }} with IP address {{ ansible_ssh_host }}"
+- name: "Setup node"
+  shell: "dpkg -i /vagrant/deb/*.deb"
+

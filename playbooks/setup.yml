@@ -1,0 +1,10 @@
+- hosts: node1
+  become: true
+  tasks:
+  - include: setup-node.yml
+
+- hosts: node2
+  become: true
+  tasks:
+  - include: setup-node.yml
+
