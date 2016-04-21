@@ -12,6 +12,8 @@ This repository contains a minimal reproduce of the [Invalid data read from sync
 
 - `vagrant up`
 
+The nodes can be accessed by username `root` and password `puppet`.
+
 ## Links
 
 - [PostgreSQL inquiry](http://www.postgresql.org/message-id/OF432D0315.B1FA563D-ONC1257F9C.002AC170-C1257F9C.002C6CD1@schneider-electric.com)
