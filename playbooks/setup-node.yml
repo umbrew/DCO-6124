@@ -1,4 +1,17 @@
-- debug: msg="Running setup on {{ inventory_hostname }} with IP address {{ ansible_ssh_host }}"
-- name: "Setup node"
+- debug: msg="Running setup on {{inventory_hostname}} with IP address {{ansible_ssh_host}}"
+
+- name: "Install PostgreSQL"
   shell: "dpkg -i /vagrant/deb/*.deb"
+
+- name: "Stop PostgreSQL"
+  shell: "service postgresql stop"
+
+- name: "Copy pg_hba.conf"
+  shell: "cp /vagrant/conf/pg_hba.conf /etc/postgresql/9.1/main"
+
+- name: "Copy postgresql.conf"
+  shell: "cp /vagrant/conf/{{node_role}}-postgresql.conf /etc/postgresql/9.1/main/postgresql.conf"
+
+- name: "Copy recovery.conf"
+  shell: "cp /vagrant/conf/{{node_role}}-recovery.conf /var/lib/postgresql/9.1/main/recovery.conf"
 
