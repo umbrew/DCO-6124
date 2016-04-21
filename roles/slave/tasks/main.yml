@@ -1,0 +1,8 @@
+- debug: msg="Applying slave configuration on {{inventory_hostname}} with IP address {{ansible_ssh_host}}"
+
+- name: "Copy slave postgresql.conf"
+  shell: "cp /vagrant/conf/slave-postgresql.conf /etc/postgresql/9.1/main/postgresql.conf"
+
+- name: "Copy slave recovery.conf"
+  shell: "cp /vagrant/conf/slave-recovery.conf /var/lib/postgresql/9.1/main/recovery.conf"
+

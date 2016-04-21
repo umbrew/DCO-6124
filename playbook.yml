@@ -1,0 +1,18 @@
+- name: Apply common configuration to all nodes
+  hosts: all
+  become: true
+  roles:
+    - common
+
+- name: Apply configuration to master node
+  hosts: master
+  become: true
+  roles:
+    - master
+
+- name: Apply configuration to slave node
+  hosts: slave
+  become: true
+  roles:
+    - slave
+

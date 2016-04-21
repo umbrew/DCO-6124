@@ -1,0 +1,8 @@
+- debug: msg="Applying master configuration on {{inventory_hostname}} with IP address {{ansible_ssh_host}}"
+
+- name: "Copy master postgresql.conf"
+  shell: "cp /vagrant/conf/master-postgresql.conf /etc/postgresql/9.1/main/postgresql.conf"
+
+- name: "Copy master recovery.conf"
+  shell: "cp /vagrant/conf/master-recovery.conf /var/lib/postgresql/9.1/main/recovery.conf"
+
