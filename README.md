@@ -14,6 +14,26 @@ This repository contains a minimal reproduce of the [Invalid data read from sync
 
 The nodes can be accessed by username `root` and password `puppet`.
 
+### Write to master
+
+- `ansible-playbook playbooks/master-write.yml`
+
+### Attach slave
+
+- `ansible-playbook playbooks/slave-attach.yml`
+
+### Set master in synchronous mode
+
+- `ansible-playbook playbooks/master-sync-enable.yml`
+
+### Set master in asynchronous mode
+
+- `ansible-playbook playbooks/master-sync-disable.yml`
+
+### Check slave
+
+- `ansible-playbook playbooks/slave-check.yml`
+
 ## Links
 
 - [PostgreSQL inquiry](http://www.postgresql.org/message-id/OF432D0315.B1FA563D-ONC1257F9C.002AC170-C1257F9C.002C6CD1@schneider-electric.com)

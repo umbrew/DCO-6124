@@ -1,0 +1,7 @@
+- hosts: master
+  become: true
+  tasks:
+  - name: "Enable synchronous mode on master"
+    shell: "sed -i \"s/^#synchronous_commit='on'/synchronous_commit='on'/\" /etc/postgresql/9.1/main/postgresql.conf && sed -i \"s/^#synchronous_standby_names='192.168.56.102'/synchronous_standby_names='192.168.56.102'/\" /etc/postgresql/9.1/main/postgresql.conf"
+  - name: "Restart PostgreSQL"
+    shell: "service postgresql reload"

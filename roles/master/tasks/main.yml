@@ -1,8 +1,22 @@
 - debug: msg="Applying master configuration on {{inventory_hostname}} with IP address {{ansible_ssh_host}}"
 
-- name: "Copy master postgresql.conf"
+- name: "Set wal_level to hot_standby"
+  lineinfile: dest=/etc/postgresql/9.1/main/postgresql.conf regexp=^#wal_level line="wal_level = hot_standby"
+
+- name: "Restart PostgreSQL"
+  shell: "service postgresql restart"
+
+- name: "Create root role in PostgreSQL"
+  shell: "su -c 'psql -c \"CREATE ROLE root SUPERUSER LOGIN\"' postgres"
+
+- name: "Create test database in PostgreSQL"
+  shell: "su -c 'psql -c \"CREATE DATABASE root OWNER root\"' postgres"
+
+- name: "Create data table in test database in PostgreSQL"
+  shell: psql -c 'CREATE TABLE data (id INTEGER PRIMARY KEY, comment VARCHAR(100))'
+
+- name: "Apply postgresql.conf"
   shell: "cp /vagrant/conf/master-postgresql.conf /etc/postgresql/9.1/main/postgresql.conf"
 
-- name: "Copy master recovery.conf"
-  shell: "cp /vagrant/conf/master-recovery.conf /var/lib/postgresql/9.1/main/recovery.conf"
-
+- name: "Restart PostgreSQL"
+  shell: "service postgresql restart"

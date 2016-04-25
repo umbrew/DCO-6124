@@ -1,0 +1,17 @@
+- hosts: slave
+  become: true
+  tasks:
+  - name: "Stop PostgreSQL"
+    shell: "service postgresql stop"
+  - name: "Remove PostgreSQL data"
+    shell: "rm -rf /var/lib/postgresql/9.1/main/*"
+  - name: "Performing binary backup of master"
+    shell: "pg_basebackup --no-password --host=192.168.56.101 --label=FromMaster --username=root --pgdata=/var/lib/postgresql/9.1/main"
+  - name: "echo Linking certificates"
+    shell: "ln -s /etc/ssl/certs/ssl-cert-snakeoil.pem /var/lib/postgresql/9.1/main/server.crt && ln -s /etc/ssl/private/ssl-cert-snakeoil.key /var/lib/postgresql/9.1/main/server.key"
+  - name: "Fixing permissions"
+    shell: "cd /var/lib/postgresql/9.1/main/ && chown -R postgres:postgres backup_label base/ global/ pg_* PG_VERSION"
+  - name: "Apply recovery.conf"
+    shell: "cp /vagrant/conf/slave-recovery.conf /var/lib/postgresql/9.1/main/recovery.conf"
+  - name: "Start PostgreSQL"
+    shell: "service postgresql start"

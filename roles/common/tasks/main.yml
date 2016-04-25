@@ -1,11 +1,10 @@
 - debug: msg="Applying common configuration on {{inventory_hostname}} with IP address {{ansible_ssh_host}}"
 
+- name: "Set kernel.shmmax"
+  sysctl: name=kernel.shmmax value=500000000
+
 - name: "Install PostgreSQL"
   shell: "dpkg -i /vagrant/deb/*.deb"
 
-- name: "Stop PostgreSQL"
-  service: name=postgresql state=stopped
-
-- name: "Copy common pg_hba.conf"
+- name: "Apply pg_hba.conf"
   shell: "cp /vagrant/conf/pg_hba.conf /etc/postgresql/9.1/main"
-

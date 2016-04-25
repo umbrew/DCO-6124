@@ -1,0 +1,5 @@
+- hosts: slave
+  become: true
+  tasks:
+  - name: "Check PostgreSQL"
+    shell: "/vagrant/scripts/slave-check.sh"
