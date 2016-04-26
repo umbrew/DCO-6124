@@ -12,9 +12,6 @@
 - name: "Create test database in PostgreSQL"
   shell: "su -c 'psql -c \"CREATE DATABASE root OWNER root\"' postgres"
 
-- name: "Create data table in test database in PostgreSQL"
-  shell: psql -c 'CREATE TABLE data (id INTEGER PRIMARY KEY, comment VARCHAR(100))'
-
 - name: "Apply postgresql.conf"
   shell: "cp /vagrant/conf/master-postgresql.conf /etc/postgresql/9.1/main/postgresql.conf"
 
